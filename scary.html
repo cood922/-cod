@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>...</title>
+<style>
+  html,body{margin:0;height:100%;background:#000;overflow:hidden;}
+  #overlay{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    display:flex;align-items:center;justify-content:center;
+    color:#f00;font-size:28px;font-family:"Courier New",monospace;
+    text-align:center;
+    animation:flash 0.2s infinite;
+  }
+  @keyframes flash {
+    0%,100% {background:#000;color:rgb(58, 8, 8);}
+    50% {background:rgba(45, 4, 4, 0.803);color:#000;}
+  }
+  img{position:absolute;max-width:100%;max-height:100%;opacity:0;transition:opacity 0.4s;}
+</style>
+</head>
+<body>
+  <div id="overlay">v=t1&im=M&aqid=4bvWaJT5EKGU9t8PirznqQg&pv=0.202528794220
+    60932&me=355:1758903438465,V,0,0,0,0:128068,V,0,0,1685,826:248,h,1,CBAQAA,i:
+    17,h,1,CBAQAA,o:18,h,2,CAcQBg,i:0,h,2,CAcQBA,i:0,h,1,CAwQAg,i:0,h,1,CAYv=t1&im=M&aqid=4bvWaJT5EKGU9t8PirznqQg&pv=0.2025287942206093,h,1,CAwQAg,i:0,QBw,i:0,h,1,CAYQBg,i.</div>
+  <img id="face" src="44545.png" alt="scary">
+  <audio id="sound" src="scary_sound.mp3"></audio>
+
+<script>
+  const snd = document.getElementById('sound');
+  // نحاول تشغيل الصوت فوراً، لو منع المتصفح يظهر زر
+  snd.play().catch(()=>{
+    const b=document.createElement('button');
+    b.textContent="&1580hi&";
+    b.style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:15px 20px;background:#900;color:#fff;border:0;font-size:20px";
+    document.body.appendChild(b);
+    b.onclick=()=>{snd.play();b.remove();}
+  });
+
+  // بعد ثواني نضيف تأثيرات إضافية
+  setTimeout(()=>{
+    document.getElementById('face').style.opacity=1;
+  }, 3000);
+
+  // اهتزاز الشاشة بسيط
+  setInterval(()=>{
+    const x = (Math.random()-0.5)*20;
+    const y = (Math.random()-0.5)*20;
+    document.body.style.transform=`translate(${x}px,${y}px)`;
+  }, 100);
+</script>
+</body>
+</html>
